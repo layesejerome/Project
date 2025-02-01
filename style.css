@@ -1,90 +1,84 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f9;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
 }
 
-.todo-container {
+.container {
     background-color: #fff;
     padding: 20px;
     border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 300px;
-    text-align: center;
 }
 
 h1 {
-    font-size: 24px;
+    text-align: center;
     margin-bottom: 20px;
 }
 
-.input-container {
+#todo-form {
     display: flex;
-    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-input {
-    width: 80%;
-    padding: 8px;
-    font-size: 16px;
-    border: 1px solid #ddd;
+#todo-input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #ccc;
     border-radius: 4px;
+    margin-right: 10px;
 }
 
 button {
-    padding: 8px 16px;
-    font-size: 16px;
-    background-color: #28a745;
-    color: white;
+    padding: 10px 15px;
+    background-color: #28a745; /* Green */
+    color: #fff; /* White */
     border: none;
     border-radius: 4px;
     cursor: pointer;
-    margin-left: 10px;
 }
 
 button:hover {
-    background-color: #218838;
+    background-color: #218838; /* Darker Green */
 }
 
-ul {
+#todo-list {
     list-style-type: none;
     padding: 0;
 }
 
-li {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin: 5px 0;
-    border-radius: 4px;
+.todo-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 10px;
+    border-bottom: 1px solid #ccc;
 }
 
-li button {
-    padding: 5px 10px;
-    font-size: 12px;
-    background-color: #007bff;
+.todo-item:last-child {
+    border-bottom: none;
+}
+
+.todo-item span {
+    flex: 1;
+    margin-right: 10px;
+}
+
+.todo-item button {
+    background-color: #dc3545; /* Red */
     border: none;
-    color: white;
-    cursor: pointer;
+    color: #fff;
+    padding: 5px 10px;
     border-radius: 4px;
-    margin-left: 5px;
+    cursor: pointer;
 }
 
-li button:hover {
-    background-color: #0056b3;
-}
-
-li button.delete {
-    background-color: #dc3545;
-}
-
-li button.delete:hover {
-    background-color: #c82333;
+.todo-item button:hover {
+    background-color: #c82333; /* Darker Red */
 }

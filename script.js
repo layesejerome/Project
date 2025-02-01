@@ -1,42 +1,56 @@
-document.getElementById('add-btn').addEventListener('click', addTask);
+// Array to store todos
+let todos = [];
 
-function addTask() {
-    const input = document.getElementById('todo-input');
-    const taskText = input.value.trim();
+// DOM Elements
+const todoInput = document.getElementById('todo-input');
+const todoForm = document.getElementById('todo-form');
+const todoList = document.getElementById('todo-list');
 
-    if (taskText === '') {
-        alert('Please enter a task.');
-        return;
-    }
-
-    const taskItem = document.createElement('li');
-    taskItem.innerHTML = `
-        <span>${taskText}</span>
-        <div class="button-group">
-            <button class="edit-btn">Edit</button>
-            <button class="delete-btn">Delete</button>
-        </div>
-    `;
-
-    // Add edit button functionality
-    taskItem.querySelector('.edit-btn').addEventListener('click', function() {
-        const newTaskText = prompt('Edit your task:', taskText);
-        if (newTaskText && newTaskText.trim() !== '') {
-            taskItem.querySelector('span').textContent = newTaskText;
-        }
+// Function to render todos
+function renderTodos() {
+    todoList.innerHTML = ''; // Clear the list
+    todos.forEach((todo, index) => {
+        const li = document.createElement('li');
+        li.className = 'todo-item';
+        li.innerHTML = `
+            <span>${todo}</span>
+            <button onclick="editTodo(${index})">Edit</button>
+            <button onclick="deleteTodo(${index})">Delete</button>
+        `;
+        todoList.appendChild(li);
     });
-
-    // Add delete button functionality
-    taskItem.querySelector('.delete-btn').addEventListener('click', function() {
-        const confirmation = confirm('Are you sure you want to delete this task?');
-        if (confirmation) {
-            taskItem.remove();
-        }
-    });
-
-    // Append the task to the list
-    document.getElementById('todo-list').appendChild(taskItem);
-
-    // Clear input after adding task
-    input.value = '';
 }
+
+// Function to add a new todo
+function addTodo(event) {
+    event.preventDefault(); // Prevent form submission
+    const newTodo = todoInput.value.trim();
+    if (newTodo) {
+        todos.push(newTodo);
+        todoInput.value = ''; // Clear the input
+        renderTodos();
+    }
+}
+
+// Function to edit a todo
+function editTodo(index) {
+    const updatedTodo = prompt('Edit your todo:', todos[index]);
+    if (updatedTodo !== null) {
+        todos[index] = updatedTodo.trim();
+        renderTodos();
+    }
+}
+
+// Function to delete a todo
+function deleteTodo(index) {
+    if (confirm('Are you sure you want to delete this todo?')) {
+        todos.splice(index, 1);
+        renderTodos();
+    }
+}
+
+// Event Listeners
+todoForm.addEventListener('submit', addTodo);
+
+// Initial render
+renderTodos();
